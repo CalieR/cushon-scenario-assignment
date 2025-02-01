@@ -23,7 +23,7 @@ const FundsList = () => {
   }
 
   return (
-    <div>
+    <div className="flex flew-row mt-4">
       {funds.length > 0 ? (
         funds.map((fund) => <FundsListItem key={fund.id} fund={fund} />)
       ) : (

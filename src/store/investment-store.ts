@@ -1,19 +1,20 @@
 import { create } from "zustand";
 import { v4 as uuidv4 } from "uuid";
 import { Fund, Investment, InvestmentStore, Portfolio } from "../types/types";
+import { persistInvestment } from "../api/investment-api";
 
 const validateInvestment = (amount: number, portfolio: Portfolio) => {
-  if (amount <= 0) {
+  if (amount < 1 || Number.isNaN(amount)) {
     return {
       success: false,
-      message: `You must invest at least £1 in this fund - you have ${portfolio.remainingAllocation} left to invest`,
+      message: `You must invest at least £1 in this fund - you have £${portfolio.remainingAllocation} left to invest`,
     };
   }
 
   if (portfolio.remainingAllocation < Number(amount)) {
     return {
       success: false,
-      message: `You don't have sufficient funds to invest this amount - you have ${portfolio.remainingAllocation} left to invest`,
+      message: `You don't have sufficient funds to invest this amount - you have £${portfolio.remainingAllocation} left to invest`,
     };
   }
   return {
@@ -59,7 +60,7 @@ const useInvestmentStore = create<InvestmentStore>()((set, get) => ({
   investableFunds: [],
   selectedFund: null,
   portfolio: {
-    customerId: 0,
+    customerId: 123,
     investments: [],
     totalInvested: 0,
     remainingAllocation: 20000,
@@ -81,19 +82,18 @@ const useInvestmentStore = create<InvestmentStore>()((set, get) => ({
   },
   addInvestment: (fund, amount) => {
     const portfolio = get().portfolio;
-    const customerId = get().portfolio.customerId;
+    const customerId = get().customer.id;
     const response = validateInvestment(amount, portfolio);
     if (!response.success) {
       return response;
     }
     const newInvestment = createInvestment(amount, customerId, fund);
-
     const updatedPortfolio = updatePortfolio(portfolio, newInvestment);
     set((state) => ({
       ...state,
       portfolio: updatedPortfolio,
     }));
-
+    persistInvestment(customerId, updatedPortfolio);
     return response;
   },
 }));

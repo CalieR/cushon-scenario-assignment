@@ -1,9 +1,10 @@
 const Footer = () => {
-    return (
-      <div>
-        <h1>Footer</h1>
-      </div>
-    );
-  };
-  
-  export default Footer;
+  return (
+    <div className="bg-neutral-800 text-neutral-200 p-4 text-center">
+      <p>NatWest Cushon</p>
+      <p>Made by CLR</p>
+    </div>
+  );
+};
+
+export default Footer;

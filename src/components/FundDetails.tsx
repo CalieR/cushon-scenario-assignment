@@ -33,12 +33,17 @@ const FundDetails = () => {
 
   return (
     <>
-      <div>
-        <h1>Details: {selectedFund?.name}</h1>
-        <p>{selectedFund.description}</p>
-        <div>
-          <h3 className="font-bold text-lg">How much do you want to invest?</h3>
-          <p className="py-4">
+      <div className="border-1 border-secondary rounded-md w-5/6 m-auto p-4 mt-2">
+        <h2 className="text-2xl underline p-4"> {selectedFund?.name}</h2>
+        <p className="text-lg">
+          Here's what you need to know about this fund before investing:
+        </p>
+        <p className="text-sm m-2">{selectedFund.description}</p>
+        <div className="m-2">
+          <h3 className="font-bold text-lg">
+            How much would you like to invest?
+          </h3>
+          <p className="py-2">
             NB: The maximum amount you can deposit is £20,000 per tax year
           </p>
           <input
@@ -50,13 +55,23 @@ const FundDetails = () => {
             onChange={(e) => handleAmountInput(e.target.value)}
           />
         </div>
-        <strong>{errorMessage}</strong>
-        <button className="btn btn-neutral" onClick={handleBackButtonClick}>
-          Back
-        </button>
-        <button className="btn btn-secondary" onClick={handleCreateInvestment}>
-          Invest
-        </button>
+
+        <p className="text-md text-orange-700">{errorMessage}</p>
+
+        <div className="flex flex-row justify-between mt-2">
+          <button
+            className="btn btn-neutral flex-none"
+            onClick={handleBackButtonClick}
+          >
+            Back
+          </button>
+          <button
+            className="btn btn-secondary flex-none"
+            onClick={handleCreateInvestment}
+          >
+            Invest
+          </button>
+        </div>
       </div>
     </>
   );

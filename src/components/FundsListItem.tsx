@@ -13,8 +13,8 @@ const FundsListItem = ({ fund }: FundsListItemProps) => {
         <div className="card-body items-center text-center">
           <h2 className="card-title mb-2">{fund.name}</h2>
           <div className="card-actions justify-end">
-            <button className="btn" onClick={() => selectFund(fund)}>
-              Select this fund
+            <button className="btn btn-sm btn-secondary" onClick={() => selectFund(fund)}>
+              Select
             </button>
           </div>
         </div>
