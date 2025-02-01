@@ -1,34 +1,61 @@
 import { useState } from "react";
-import { Fund } from "../types/types";
+import useInvestmentStore from "../store/investment-store";
 
+const FundDetails = () => {
+  const { selectedFund, unSelectFund, addInvestment } = useInvestmentStore();
 
-interface FundDetailsProps {
-  fund: Fund;
-  toggleShowFundDetails: () => void;
-}
+  const [investmentAmount, setInvestmentAmount] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
-const FundDetails = ({ fund, toggleShowFundDetails }: FundDetailsProps) => {
-  const [showAmountInput, setShowAmountInput] = useState(false);
+  if (!selectedFund) {
+    return;
+  }
 
-  const toggleShowAmountInput = () => {
-    setShowAmountInput(!showAmountInput);
+  const handleBackButtonClick = () => {
+    setErrorMessage("");
+    setInvestmentAmount("");
+    unSelectFund();
   };
+
+  const handleAmountInput = (amount: string) => {
+    setInvestmentAmount(amount);
+  };
+
+  const handleCreateInvestment = () => {
+    const response = addInvestment(selectedFund, parseInt(investmentAmount));
+    if (!response.success) {
+      setErrorMessage(response.message);
+      return;
+    }
+    setInvestmentAmount("");
+    unSelectFund();
+  };
+
   return (
     <>
       <div>
-        <h1>Details: {fund.name}</h1>
-        <p>{fund.description}</p>
-        <button
-          className="btn btn-neutral"
-          onClick={() => toggleShowFundDetails()}
-        >
+        <h1>Details: {selectedFund?.name}</h1>
+        <p>{selectedFund.description}</p>
+        <div>
+          <h3 className="font-bold text-lg">How much do you want to invest?</h3>
+          <p className="py-4">
+            NB: The maximum amount you can deposit is £20,000 per tax year
+          </p>
+          <input
+            type="number"
+            id="amount"
+            name="amount"
+            placeholder="Enter amount"
+            value={investmentAmount}
+            onChange={(e) => handleAmountInput(e.target.value)}
+          />
+        </div>
+        <strong>{errorMessage}</strong>
+        <button className="btn btn-neutral" onClick={handleBackButtonClick}>
           Back
         </button>
-        <button
-          className="btn btn-secondary"
-          onClick={() => toggleShowAmountInput()}
-        >
-          Select
+        <button className="btn btn-secondary" onClick={handleCreateInvestment}>
+          Invest
         </button>
       </div>
     </>
