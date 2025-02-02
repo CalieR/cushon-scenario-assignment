@@ -44,7 +44,7 @@ const FundDetails = () => {
             How much would you like to invest?
           </h3>
           <p className="py-2">
-            NB: The maximum amount you can deposit is £20,000 per tax year
+            NB: The maximum amount you can deposit into an ISA is £20,000 per tax year
           </p>
           <input
             type="number"

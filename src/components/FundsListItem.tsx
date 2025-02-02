@@ -8,7 +8,7 @@ const FundsListItem = ({ fund }: FundsListItemProps) => {
   const { selectFund } = useInvestmentStore();
 
   return (
-    <>
+    <div className="mx-auto">
       <div className="card card-border border-secondary w-96 m-2">
         <div className="card-body items-center text-center">
           <h2 className="card-title mb-2">{fund.name}</h2>
@@ -19,7 +19,7 @@ const FundsListItem = ({ fund }: FundsListItemProps) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

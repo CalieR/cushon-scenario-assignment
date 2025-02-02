@@ -1,50 +1,80 @@
-# React + TypeScript + Vite
+# Cushon ISA Investment app
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Recruitment scenario submission
 
-Currently, two official plugins are available:
+This is a small app created according to the recruitment scenario provided.  The app allows the user to select a fund from a list, and then provide an amount of money they would like to invest in that fund.  Once they have done this, they can view the details of that investment, and make another if they have sufficent allocation remaining.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+## Pre-requisites
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+This app was built with the following tools and versions:
 
-- Configure the top-level `parserOptions` property like this:
+- node version lts/hydrogen
+- npm version 11.0.0 
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Setup Instructions
+
+To run the app locally - after cloning the repo, run the following commands from the root directory:
+
+```
+npm install
+npm run dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Rationale and Execution
+
+- After studying the brief, I spent some time on the NatWest Cushon website looking at the options currently available to retail (non-employee) customers.  
+
+- I started to think about the minimum requirements of the app were going to be, thought about the shape and content of the store, then determined an MVP.
+
+- Once I'd decided on the elements I felt the app needed (and didn't need) to have, I was able to make decisions about what 'toolkit' to use, and settled on the following:
+
+  - Vite + React + Typescript (with ESLint and Prettier)
+  - Zustand for state management
+  - Tailwind + DaisyUI for styling
+  - Vitest with React Testing Library for testing
+
+  With the exception of Zustand I have used all of these tools before, to varying degrees.  Zustand has been recommended to me previously so I did a bit of investigation and I found it incredibly easy to get started with.
+
+## Decisions
+
+I also made the following decisions around what I would and wouldn't add to this app:
+
+- Use local storage to save a customer's investment. Not an appropriate real-world solution but sufficient for the completion of this task.
+
+- Use a mock 'database' file to hold minimal details about the investable funds.
+
+- Mock the app as though a customer is already logged in.
+
+In the real world none of these would be appropriate of course.
+
+## Assumptions
+
+I made the following assumptions after looking at the scenario, and my own experience of this kind of online process:
+
+- Fund information would be much more detailed, and subject to change frequently.  As such it would reside in a potentially complex database with multiple endpoints for accessing the details.
+
+- The actual investment process would be far more complex.  The customer would need to be presented with more detailed fund information (percentage, risk profile etc) in accordance with legal requirements etc.  Presumably the app would integrate with 3rd party API's in order to provide credit-checking etc etc.
+
+- Employee ISA holders already have a lot of their details pre-filled / submitted via the employer.  An individual / retail ISA application would need to collect a lot of personal information from a customer, so would probably require a wizard or similar to guide the user through the process.
+
+
+## Future Enhancements
+
+With more time, and if this were a real-world scenario, I would add the following enhancements:
+
+- Robust testing and assertions, particularly around the rules concerning the monetary amount entered.
+
+- Put the list of investments made into a dedicated account section that could be accessed through a customer profile.
+
+- Add authentication / login with a dedicated route for retail customers.
+
+- Allow the customer to invest in multiple funds, perhaps use a checklist or multi-select grid to facilitate this from a ui point of view.  A new investment is currently stored in an object where the id and name of the selected fund are stored - an array could be used instead to save all of the funds selected by the customer.
+
+- Add Storybook to create a component library that can be developed in isolation from the rest of the application.
+
+- Fully optimise for all screen sizes.
+
+- Ensure adherance to A11y accessibility standards

@@ -8,7 +8,7 @@ const Portfolio = () => {
   if (!customerProfile) {
     return (
       <div className="border-1 rounded-md w-5/6 mx-auto">
-        <h1>Investment Portfolio</h1>
+        <h1>Cushon ISA - Portfolio</h1>
         <p>No investments made</p>
       </div>
     );
@@ -18,7 +18,7 @@ const Portfolio = () => {
     <div className="border-1 rounded-md w-5/6 mx-auto">
       <div className="grid grid-cols-3 gap-4 m-4">
         <div className="col-span-2">
-          <h1 className="text-xl">Investment Portfolio</h1>
+          <h1 className="text-xl">Cushon ISA - Portfolio</h1>
         </div>
         <div className="col-span-1 border-2 rounded-md border-gray-300">
           <p>Total Invested: £{customerProfile.totalInvested}</p>
