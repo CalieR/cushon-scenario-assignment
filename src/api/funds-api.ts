@@ -1,5 +1,12 @@
 import { funds } from "../db/mock-data"
+import { Fund } from "../types/types";
 
-export const getFunds = () => {
-    return funds
+// Simulating an actual api call by putting a delay on the response.
+
+export const getFunds = (): Promise<Fund[]> => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(funds);
+        }, 1000);
+    });
 }

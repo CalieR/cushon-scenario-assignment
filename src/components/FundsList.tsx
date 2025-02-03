@@ -7,12 +7,13 @@ const FundsList = () => {
   const { investableFunds, setInvestableFunds, selectedFund } =
     useInvestmentStore();
 
-  const fetchFunds = async () => {
-    const funds = await getFunds();
-    setInvestableFunds(funds);
-  };
-
+  //  I think the app store should actually assume responsibility for fetching the funds and handling loading / error / success states.
   useEffect(() => {
+    const fetchFunds = async () => {
+      const funds = await getFunds();
+      setInvestableFunds(funds);
+    };
+
     fetchFunds();
   }, []);
 
@@ -27,7 +28,7 @@ const FundsList = () => {
           <FundsListItem key={fund.id} fund={fund} />
         ))
       ) : (
-        <p>No funds found</p>
+        <p  className="mx-auto"><span className="loading loading-spinner loading-xs"></span> Loading funds...</p>
       )}
     </div>
   );
