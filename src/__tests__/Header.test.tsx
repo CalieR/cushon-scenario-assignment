@@ -11,5 +11,10 @@ describe("Header", () => {
     expect(element).toBeInTheDocument();
   });
 
-
+  it("should render the name of the logged-in customer", () => {
+    render(<Header />);
+    const element = screen.getByTestId("customer-name");
+    expect(element).toBeInTheDocument();
+    expect(element).toHaveTextContent("Bob Smith");
+  });
 });

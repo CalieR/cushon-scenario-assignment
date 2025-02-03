@@ -12,4 +12,4 @@ export const persistInvestment = (customerId: number, portfolio: Portfolio) => {
   return writeToLocalStorage(`customer-${customerId}-portfolio`, portfolio);
 };
 
-// In the real world we wouldn't actually keep this information in local storage!
+

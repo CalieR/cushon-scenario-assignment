@@ -5,8 +5,6 @@ export type Fund = {
   description: string;
 };
 
-// Fund could feasibly contain other bits of information, or it could just be a reference to a database table containing full details
-
 export type Investment = {
   id: string;
   customerId: number;
@@ -15,8 +13,6 @@ export type Investment = {
   amount: number;
   dateCreated: Date;
 };
-
-// in the future when multiple funds selection is allowed, fundId could be an array of funds
 
 export type Portfolio = {
   customerId: number;
@@ -40,6 +36,7 @@ export interface InvestmentStore {
   selectedFund: Fund | null;
   portfolio: Portfolio;
   customer: Customer;
+  setInvestableFunds: (funds: Fund[]) => void;
   selectFund: (fund: Fund) => void;
   unSelectFund: () => void;
   addInvestment: (fund: Fund, amount: number) => ValidationResponse;

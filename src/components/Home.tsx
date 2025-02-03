@@ -1,15 +1,13 @@
-
 import FundDetails from "./FundDetails";
 import FundsList from "./FundsList";
 import Portfolio from "./Portfolio";
 
 const Home = () => {
-
   return (
     <div>
       <Portfolio />
       <FundsList />
-      <FundDetails  />
+      <FundDetails />
     </div>
   );
 };

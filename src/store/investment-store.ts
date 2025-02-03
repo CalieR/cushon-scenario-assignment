@@ -3,6 +3,8 @@ import { v4 as uuidv4 } from "uuid";
 import { Fund, Investment, InvestmentStore, Portfolio } from "../types/types";
 import { persistInvestment } from "../api/investment-api";
 
+// TODO: validate the amount input with a library (like yup)
+
 const validateInvestment = (amount: number, portfolio: Portfolio) => {
   if (amount < 1 || Number.isNaN(amount)) {
     return {
@@ -68,6 +70,12 @@ const useInvestmentStore = create<InvestmentStore>()((set, get) => ({
   customer: {
     id: 123,
     name: "Bob Smith",
+  },
+  setInvestableFunds: (funds: Fund[]) => {
+    set((state) => ({
+      ...state,
+      investableFunds: funds,
+    }));
   },
   selectFund: (fund) => {
     set((state) => ({

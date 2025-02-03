@@ -1,17 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getFunds } from "../api/funds-api";
-import { Fund } from "../types/types";
 import FundsListItem from "./FundsListItem";
 import useInvestmentStore from "../store/investment-store";
 
 const FundsList = () => {
-  const { selectedFund } = useInvestmentStore();
-
-  const [funds, setFunds] = useState<Fund[]>([]);
+  const { investableFunds, setInvestableFunds, selectedFund } =
+    useInvestmentStore();
 
   const fetchFunds = async () => {
     const funds = await getFunds();
-    setFunds(funds);
+    setInvestableFunds(funds);
   };
 
   useEffect(() => {
@@ -24,8 +22,10 @@ const FundsList = () => {
 
   return (
     <div className="flex flex-col md:flex-row md:flex-wrap mt-4">
-      {funds.length > 0 ? (
-        funds.map((fund) => <FundsListItem key={fund.id} fund={fund} />)
+      {investableFunds.length > 0 ? (
+        investableFunds.map((fund) => (
+          <FundsListItem key={fund.id} fund={fund} />
+        ))
       ) : (
         <p>No funds found</p>
       )}
