@@ -67,6 +67,8 @@ I made the following assumptions after looking at the scenario, and my own exper
 
 With more time, and if this were a real-world scenario, I would add the following enhancements:
 
+- Implement a design pattern to properly separate the UI from the business logic.  Something I have been reading about is the Container-Presenter pattern, which I feel would be particularly useful for this application.
+
 - Robust testing and assertions, particularly around the rules concerning the monetary amount entered.
 
 - Put the list of investments into a dedicated account section that could be accessed through a customer profile.
